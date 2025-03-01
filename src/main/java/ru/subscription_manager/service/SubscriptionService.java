@@ -32,6 +32,11 @@ public class SubscriptionService {
         try {
             Subscription subscription = createSubscription.create();
 
+            Optional<Subscription> subscriptionOpt = subscriptionRepository.findByName(subscription.getName());
+            if (subscriptionOpt.isPresent()) {
+                return subscriptionOpt.orElseThrow();
+            }
+
             return subscriptionRepository.save(subscription);
         } catch (Exception e) {
             throw new DbException("Server error while adding subscription", e);

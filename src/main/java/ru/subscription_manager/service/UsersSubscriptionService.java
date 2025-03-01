@@ -1,6 +1,7 @@
 package ru.subscription_manager.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -78,6 +79,14 @@ public class UsersSubscriptionService {
             return usersSubscriptionRepository.save(usersSubscriptionEdited);
         } catch (Exception e) {
             throw new DbException("Server error while editing users subscription", e);
+        }
+    }
+
+    public void delete(UserSubscriptionId id) {
+        try {
+            usersSubscriptionRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new DbException("Server error while deleting users subscription", e);
         }
     }
 
