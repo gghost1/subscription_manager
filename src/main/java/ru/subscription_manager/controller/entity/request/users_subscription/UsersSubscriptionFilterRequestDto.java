@@ -1,4 +1,4 @@
-package ru.subscription_manager.controller.entity.request.subscription;
+package ru.subscription_manager.controller.entity.request.users_subscription;
 
 import ru.subscription_manager.service.entity.filter.ComparisonType;
 import ru.subscription_manager.service.entity.filter.ExpirationDateFilter;
@@ -13,7 +13,7 @@ public record UsersSubscriptionFilterRequestDto(
         Boolean active
 ) {
 
-    public UsersSubscriptionFilter toFilter() {
+    public UsersSubscriptionFilter toUsersSubscriptionFilter() {
         if (expirationDate == null || comparisonType == null) {
             return new UsersSubscriptionFilter(
                     Optional.empty(),

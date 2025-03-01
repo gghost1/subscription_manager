@@ -6,8 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.subscription_manager.controller.entity.request.subscription.CreateSubscriptionRequestDto;
-import ru.subscription_manager.controller.entity.request.subscription.EditSubscriptionRequestDto;
-import ru.subscription_manager.controller.entity.request.subscription.UsersSubscriptionFilterRequestDto;
+import ru.subscription_manager.controller.entity.request.users_subscription.EditUsersSubscriptionRequestDto;
+import ru.subscription_manager.controller.entity.request.users_subscription.UsersSubscriptionFilterRequestDto;
 import ru.subscription_manager.controller.entity.response.PaginatedList;
 import ru.subscription_manager.controller.entity.response.UsersSubscriptionResponseDto;
 import ru.subscription_manager.data.subscription.Subscription;
@@ -47,7 +47,7 @@ public class UsersSubscriptionController {
 
     @GetMapping
     public ResponseEntity<PaginatedList<UsersSubscriptionResponseDto>> getSubscription(@PathVariable UUID id, @Valid UsersSubscriptionFilterRequestDto usersSubscriptionFilterRequestDto, int page, int size) {
-        UsersSubscriptionFilter usersSubscriptionFilter = usersSubscriptionFilterRequestDto.toFilter();
+        UsersSubscriptionFilter usersSubscriptionFilter = usersSubscriptionFilterRequestDto.toUsersSubscriptionFilter();
 
         Page<UsersSubscription> usersSubscriptions = usersSubscriptionService.getAll(usersSubscriptionFilter, id, page, size);
         return ResponseEntity.ok(new PaginatedList<>(
@@ -59,8 +59,8 @@ public class UsersSubscriptionController {
     }
 
     @PutMapping("/{subscriptionId}")
-    public ResponseEntity<UsersSubscriptionResponseDto> editSubscription(@PathVariable UUID id, @PathVariable UUID subscriptionId, @Valid @RequestBody EditSubscriptionRequestDto editSubscriptionRequestDto) {
-        EditUsersSubscription editUsersSubscription = editSubscriptionRequestDto.toEditUsersSubscription(new UserSubscriptionId(id, subscriptionId));
+    public ResponseEntity<UsersSubscriptionResponseDto> editSubscription(@PathVariable UUID id, @PathVariable UUID subscriptionId, @Valid @RequestBody EditUsersSubscriptionRequestDto editUsersSubscriptionRequestDto) {
+        EditUsersSubscription editUsersSubscription = editUsersSubscriptionRequestDto.toEditUsersSubscription(new UserSubscriptionId(id, subscriptionId));
 
         UsersSubscription usersSubscription = usersSubscriptionService.edit(editUsersSubscription);
         return ResponseEntity.ok(UsersSubscriptionResponseDto.fromUsersSubscription(usersSubscription));

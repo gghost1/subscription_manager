@@ -25,6 +25,7 @@ import ru.subscription_manager.service.entity.filter.UsersSubscriptionFilter;
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -53,6 +54,8 @@ public class UsersSubscriptionService {
 
             return usersSubscriptionRepository.save(usersSubscription);
         } catch (Exception e) {
+            log.error("", e);
+
             throw new DbException("Server error while adding users subscription", e);
         }
     }
