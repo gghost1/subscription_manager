@@ -48,7 +48,13 @@ public class User {
     private String secondName;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UsersSubscription> userSubscriptions = new HashSet<>();
+    private Set<UsersSubscription> userSubscriptions;
+
+    public User(UserName name, Email email) {
+        this.name = name;
+        this.email = email;
+        this.userSubscriptions = new HashSet<>();
+    }
 }
 
 

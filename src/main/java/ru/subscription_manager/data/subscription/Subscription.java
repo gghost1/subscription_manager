@@ -25,5 +25,10 @@ public class Subscription {
     String name;
 
     @OneToMany(mappedBy = "subscription", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UsersSubscription> userSubscriptions = new HashSet<>();
+    private Set<UsersSubscription> userSubscriptions;
+
+    public Subscription(String name) {
+        this.name = name;
+        this.userSubscriptions = new HashSet<>();
+    }
 }

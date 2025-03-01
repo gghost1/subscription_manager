@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ru.subscription_manager.data.subscription.Subscription;
 import ru.subscription_manager.data.user.User;
 
@@ -19,11 +20,13 @@ public class UsersSubscription {
     @EmbeddedId
     private UserSubscriptionId id;
 
+    @Setter
     @ManyToOne
     @MapsId("userId")
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Setter
     @ManyToOne
     @MapsId("subscriptionId")
     @JoinColumn(name = "subscription_id")
@@ -34,4 +37,11 @@ public class UsersSubscription {
 
     @Column(name = "active")
     private boolean active;
+
+    public UsersSubscription(UserSubscriptionId id, LocalDate expirationDate, boolean active) {
+        this.id = id;
+        this.expirationDate = expirationDate;
+        this.active = active;
+    }
+
 }
