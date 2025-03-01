@@ -12,6 +12,7 @@ import ru.subscription_manager.configuration.exception.NotFoundException;
 import ru.subscription_manager.data.subscription.Subscription;
 import ru.subscription_manager.data.subscription.SubscriptionRepository;
 import ru.subscription_manager.data.subscription.SubscriptionSpecification;
+import ru.subscription_manager.data.subscription.SubscriptionUsage;
 import ru.subscription_manager.data.user.User;
 import ru.subscription_manager.service.entity.create.CreateEntity;
 import ru.subscription_manager.service.entity.edit.EditEntity;
@@ -66,6 +67,15 @@ public class SubscriptionService {
             return subscriptionOpt.orElseThrow();
         } catch (Exception e) {
             throw new DbException("Server error while getting subscription", e);
+        }
+    }
+
+    public List<SubscriptionUsage> getTopPopular(int limit) {
+        try {
+            List<Object[]> result = subscriptionRepository.findTopPopularSubscriptions(limit);
+            return result.stream().map(SubscriptionUsage::from).toList();
+        } catch (Exception e) {
+            throw new DbException("Server error while getting subscription usage", e);
         }
     }
 
