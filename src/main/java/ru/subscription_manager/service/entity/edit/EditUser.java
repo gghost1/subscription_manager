@@ -26,8 +26,7 @@ public record EditUser(
                 ),
                 email.map(Email::new).orElse(user.getEmail()),
                 user.getFirstName(),
-                user.getSecondName(),
-                user.getUserSubscriptions()
+                user.getSecondName()
         );
     }
 }

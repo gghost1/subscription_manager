@@ -4,10 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import ru.subscription_manager.data.users_subscription.UsersSubscription;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -24,11 +21,7 @@ public class Subscription {
     @Column(name = "name", nullable = false, unique = true)
     String name;
 
-    @OneToMany(mappedBy = "subscription", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UsersSubscription> userSubscriptions;
-
     public Subscription(String name) {
         this.name = name;
-        this.userSubscriptions = new HashSet<>();
     }
 }

@@ -14,8 +14,7 @@ public record EditSubscription(
     public Subscription edit(Subscription entity) {
         return new Subscription(
                 entity.getId(),
-                name.orElse(entity.getName()),
-                entity.getUserSubscriptions()
+                name.orElse(entity.getName())
         );
     }
 }
