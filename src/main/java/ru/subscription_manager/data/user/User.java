@@ -11,7 +11,10 @@ import ru.subscription_manager.data.type.email.Email;
 import ru.subscription_manager.data.type.email.EmailConverter;
 import ru.subscription_manager.data.type.user_name.UserName;
 import ru.subscription_manager.data.type.user_name.UserNameConverter;
+import ru.subscription_manager.data.users_subscription.UsersSubscription;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -43,5 +46,9 @@ public class User {
 
     @Formula("((name).second_name)")
     private String secondName;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UsersSubscription> userSubscriptions = new HashSet<>();
 }
+
 
