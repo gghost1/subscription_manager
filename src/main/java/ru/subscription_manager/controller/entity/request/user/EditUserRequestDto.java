@@ -1,4 +1,4 @@
-package ru.subscription_manager.controller.entity.request;
+package ru.subscription_manager.controller.entity.request.user;
 
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;

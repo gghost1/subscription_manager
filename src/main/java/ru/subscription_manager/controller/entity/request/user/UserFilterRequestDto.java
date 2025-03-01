@@ -1,4 +1,4 @@
-package ru.subscription_manager.controller.entity.request;
+package ru.subscription_manager.controller.entity.request.user;
 
 import io.micrometer.common.lang.Nullable;
 import ru.subscription_manager.service.entity.filter.UserFilter;
