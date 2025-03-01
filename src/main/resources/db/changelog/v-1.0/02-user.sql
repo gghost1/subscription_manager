@@ -9,3 +9,5 @@ CREATE TABLE users (
    name USER_NAME NOT NULL,
    email EMAIL NOT NULL UNIQUE
 );
+
+CREATE INDEX idx_users_email ON users (email);
