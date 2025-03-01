@@ -6,6 +6,6 @@ import java.util.UUID;
 public record UserFilter(
         Optional<String> firstName,
         Optional<String> secondName,
-        Optional<UUID> subscription
+        Optional<UUID> subscriptionId
 ) {
 }

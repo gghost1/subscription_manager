@@ -23,11 +23,11 @@ public class UserSpecification {
                     predicates.add(criteriaBuilder.equal(root.get("secondName"), secondName))
             );
 
-            filter.subscription().ifPresent(subscriptionId -> {
+            filter.subscriptionId().ifPresent(subscriptionId -> {
                 Join<User, UsersSubscription> userSubscriptionJoin = root.join("userSubscriptions");
                 // Условие на совпадение subscriptionId и активность подписки
                 Predicate hasSubscription = criteriaBuilder.equal(
-                        userSubscriptionJoin.get("subscription").get("id"),
+                        userSubscriptionJoin.get("subscriptionId").get("id"),
                         subscriptionId
                 );
                 Predicate isActive = criteriaBuilder.isTrue(userSubscriptionJoin.get("active"));
