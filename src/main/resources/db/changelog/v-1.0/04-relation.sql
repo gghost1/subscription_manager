@@ -5,3 +5,6 @@ CREATE TABLE users_subscriptions (
      active BOOLEAN NOT NULL,
      PRIMARY KEY (user_id, subscription_id)
 );
+
+CREATE INDEX idx_users_subscriptions_subscription_id
+    ON users_subscriptions (subscription_id);
