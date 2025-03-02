@@ -1,5 +1,7 @@
 package ru.subscription_manager.controller;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.subscription_manager.controller.entity.request.user.CreateUserRequestDto;
 import ru.subscription_manager.controller.entity.request.user.EditUserRequestDto;
 import ru.subscription_manager.controller.entity.request.user.UserFilterRequestDto;
+import ru.subscription_manager.controller.entity.response.ExceptionResponseDto;
 import ru.subscription_manager.controller.entity.response.PaginatedList;
 import ru.subscription_manager.controller.entity.response.UserResponseDto;
 import ru.subscription_manager.data.type.email.Email;
@@ -24,6 +27,24 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
+@ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Operation done successfully", useReturnTypeSchema = true),
+        @ApiResponse(responseCode = "400", description = "Incorrect request",
+                content = @io.swagger.v3.oas.annotations.media.Content(
+                        schema = @io.swagger.v3.oas.annotations.media.Schema(
+                                implementation = ExceptionResponseDto.class)
+                )),
+        @ApiResponse(responseCode = "404", description = "Not found",
+                content = @io.swagger.v3.oas.annotations.media.Content(
+                        schema = @io.swagger.v3.oas.annotations.media.Schema(
+                                implementation = ExceptionResponseDto.class)
+                )),
+        @ApiResponse(responseCode = "500", description = "Internal server error",
+                content = @io.swagger.v3.oas.annotations.media.Content(
+                        schema = @io.swagger.v3.oas.annotations.media.Schema(
+                                implementation = ExceptionResponseDto.class)
+                ))
+})
 public class UserController {
 
     private final UserService userService;

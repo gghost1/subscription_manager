@@ -13,6 +13,11 @@ import java.util.UUID;
 @Repository
 public interface SubscriptionRepository extends JpaRepository<Subscription, UUID>, JpaSpecificationExecutor<Subscription> {
 
+    /**
+     * Custom method to get most popular subscriptions
+     * @param limit maximum number of results
+     * @return row array of row data of subscription usage statistics
+     */
     @Query(value = """
         SELECT s.id, s.name, COUNT(us.subscription_id) as user_count 
         FROM subscriptions s

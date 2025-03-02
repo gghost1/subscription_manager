@@ -1,20 +1,24 @@
 package ru.subscription_manager.controller;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 import ru.subscription_manager.controller.entity.request.subscription.CreateSubscriptionRequestDto;
 import ru.subscription_manager.controller.entity.request.users_subscription.EditUsersSubscriptionRequestDto;
 import ru.subscription_manager.controller.entity.request.users_subscription.UsersSubscriptionFilterRequestDto;
+import ru.subscription_manager.controller.entity.response.ExceptionResponseDto;
 import ru.subscription_manager.controller.entity.response.PaginatedList;
 import ru.subscription_manager.controller.entity.response.UsersSubscriptionResponseDto;
 import ru.subscription_manager.data.subscription.Subscription;
-import ru.subscription_manager.data.users_subscription.UsersSubscriptionId;
 import ru.subscription_manager.data.users_subscription.UsersSubscription;
+import ru.subscription_manager.data.users_subscription.UsersSubscriptionId;
 import ru.subscription_manager.service.SubscriptionService;
 import ru.subscription_manager.service.UsersSubscriptionService;
 import ru.subscription_manager.service.entity.create.CreateSubscription;
@@ -28,6 +32,24 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/users/{id}/subscriptions")
 @RequiredArgsConstructor
+@ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Operation done successfully", useReturnTypeSchema = true),
+        @ApiResponse(responseCode = "400", description = "Incorrect request",
+                content = @io.swagger.v3.oas.annotations.media.Content(
+                        schema = @io.swagger.v3.oas.annotations.media.Schema(
+                                implementation = ExceptionResponseDto.class)
+                )),
+        @ApiResponse(responseCode = "404", description = "Not found",
+                content = @io.swagger.v3.oas.annotations.media.Content(
+                        schema = @io.swagger.v3.oas.annotations.media.Schema(
+                                implementation = ExceptionResponseDto.class)
+                )),
+        @ApiResponse(responseCode = "500", description = "Internal server error",
+                content = @io.swagger.v3.oas.annotations.media.Content(
+                        schema = @io.swagger.v3.oas.annotations.media.Schema(
+                                implementation = ExceptionResponseDto.class)
+                ))
+})
 public class UsersSubscriptionController {
 
     private final SubscriptionService subscriptionService;

@@ -10,8 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Class to filter users-Subscription entities based on specified criteria
+ */
 public class UsersSubscriptionSpecification {
 
+    /**
+     * Creates a specification for filtering users-Subscription entities
+     * @param filter filter criteria {@link UsersSubscriptionFilter}
+     * @param id users ID
+     * @return specification for users-Subscription
+     */
     public static Specification<UsersSubscription> filterUsersSubscriptions(UsersSubscriptionFilter filter, UUID id) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
