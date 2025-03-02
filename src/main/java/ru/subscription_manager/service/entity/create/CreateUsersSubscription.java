@@ -18,7 +18,8 @@ public record CreateUsersSubscription(
         return new UsersSubscription(
             new UsersSubscriptionId(userId, subscriptionId),
             expirationDate,
-            active
+            active,
+            LocalDate.now()
         );
     }
 }

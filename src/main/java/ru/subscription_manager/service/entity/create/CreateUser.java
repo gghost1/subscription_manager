@@ -4,6 +4,8 @@ import ru.subscription_manager.data.type.email.Email;
 import ru.subscription_manager.data.type.user_name.UserName;
 import ru.subscription_manager.data.user.User;
 
+import java.time.LocalDate;
+
 public record CreateUser(
         String firstName,
         String secondName,
@@ -15,7 +17,8 @@ public record CreateUser(
     public User create() {
         return new User(
                 new UserName(firstName, secondName, lastName),
-                new Email(email)
+                new Email(email),
+                LocalDate.now()
         );
     }
 

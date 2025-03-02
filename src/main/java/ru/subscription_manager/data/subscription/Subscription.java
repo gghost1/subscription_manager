@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -21,7 +22,15 @@ public class Subscription {
     @Column(name = "name", nullable = false, unique = true)
     String name;
 
-    public Subscription(String name) {
+    @Column(name = "createdAt", nullable = false)
+    private LocalDate createdAt;
+
+    @Column(name = "updatedAt", nullable = false)
+    private LocalDate updatedAt;
+
+    public Subscription(String name, LocalDate createdAt) {
         this.name = name;
+        this.createdAt = createdAt;
+        this.updatedAt = LocalDate.now();
     }
 }

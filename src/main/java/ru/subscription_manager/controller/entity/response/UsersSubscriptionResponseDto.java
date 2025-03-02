@@ -8,7 +8,9 @@ public record UsersSubscriptionResponseDto(
         UserResponseDto user,
         SubscriptionResponseDto subscription,
         boolean active,
-        LocalDate expirationDate
+        LocalDate expirationDate,
+        LocalDate createdAt,
+        LocalDate updatedAt
 ) {
 
     public static UsersSubscriptionResponseDto fromUsersSubscription(UsersSubscription usersSubscription) {
@@ -16,7 +18,9 @@ public record UsersSubscriptionResponseDto(
                 UserResponseDto.fromUser(usersSubscription.getUser()),
                 SubscriptionResponseDto.fromSubscription(usersSubscription.getSubscription()),
                 usersSubscription.isActive(),
-                usersSubscription.getExpirationDate()
+                usersSubscription.getExpirationDate(),
+                usersSubscription.getCreatedAt(),
+                usersSubscription.getUpdatedAt()
         );
     }
 

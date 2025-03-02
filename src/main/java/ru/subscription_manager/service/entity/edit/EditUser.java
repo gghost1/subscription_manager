@@ -4,6 +4,7 @@ import ru.subscription_manager.data.type.email.Email;
 import ru.subscription_manager.data.type.user_name.UserName;
 import ru.subscription_manager.data.user.User;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,6 +26,8 @@ public record EditUser(
                         lastName.orElse(user.getName().getLastName())
                 ),
                 email.map(Email::new).orElse(user.getEmail()),
+                user.getCreatedAt(),
+                LocalDate.now(),
                 user.getFirstName(),
                 user.getSecondName()
         );

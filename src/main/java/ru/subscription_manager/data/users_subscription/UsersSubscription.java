@@ -38,10 +38,23 @@ public class UsersSubscription {
     @Column(name = "active")
     private boolean active;
 
-    public UsersSubscription(UsersSubscriptionId id, LocalDate expirationDate, boolean active) {
+    @Column(name = "createdAt", nullable = false)
+    private LocalDate createdAt;
+
+    @Column(name = "updatedAt", nullable = false)
+    private LocalDate updatedAt;
+
+    public UsersSubscription(
+            UsersSubscriptionId id,
+            LocalDate expirationDate,
+            boolean active,
+            LocalDate createdAt
+    ) {
         this.id = id;
         this.expirationDate = expirationDate;
         this.active = active;
+        this.createdAt = createdAt;
+        this.updatedAt = LocalDate.now();
     }
 
 }

@@ -11,6 +11,7 @@ import ru.subscription_manager.data.type.email.EmailConverter;
 import ru.subscription_manager.data.type.user_name.UserName;
 import ru.subscription_manager.data.type.user_name.UserNameConverter;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -37,15 +38,23 @@ public class User {
     @Convert(converter = EmailConverter.class)
     private Email email;
 
+    @Column(name = "createdAt", nullable = false)
+    private LocalDate createdAt;
+
+    @Column(name = "updatedAt", nullable = false)
+    private LocalDate updatedAt;
+
     @Formula("((name).first_name)")
     private String firstName;
 
     @Formula("((name).second_name)")
     private String secondName;
 
-    public User(UserName name, Email email) {
+    public User(UserName name, Email email, LocalDate createdAt) {
         this.name = name;
         this.email = email;
+        this.createdAt = createdAt;
+        this.updatedAt = LocalDate.now();
     }
 }
 

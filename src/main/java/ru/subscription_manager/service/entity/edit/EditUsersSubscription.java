@@ -19,7 +19,9 @@ public record EditUsersSubscription(
                 entity.getUser(),
                 entity.getSubscription(),
                 expirationDate.orElse(entity.getExpirationDate()),
-                active.orElse(entity.isActive())
+                active.orElse(entity.isActive()),
+                entity.getCreatedAt(),
+                LocalDate.now()
         );
     }
 }
