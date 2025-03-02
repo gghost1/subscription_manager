@@ -1,16 +1,16 @@
 package ru.subscription_manager.service.entity.edit;
 
-import ru.subscription_manager.data.users_subscription.UserSubscriptionId;
+import ru.subscription_manager.data.users_subscription.UsersSubscriptionId;
 import ru.subscription_manager.data.users_subscription.UsersSubscription;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
 public record EditUsersSubscription(
-        UserSubscriptionId id,
+        UsersSubscriptionId id,
         Optional<LocalDate> expirationDate,
         Optional<Boolean> active
-) implements EditEntity<UsersSubscription, UserSubscriptionId> {
+) implements EditEntity<UsersSubscription, UsersSubscriptionId> {
 
     @Override
     public UsersSubscription edit(UsersSubscription entity) {

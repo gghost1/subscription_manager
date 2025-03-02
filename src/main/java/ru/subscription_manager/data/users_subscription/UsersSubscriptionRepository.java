@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsersSubscriptionRepository extends JpaRepository<UsersSubscription, UserSubscriptionId>, JpaSpecificationExecutor<UsersSubscription> {
+public interface UsersSubscriptionRepository extends JpaRepository<UsersSubscription, UsersSubscriptionId>, JpaSpecificationExecutor<UsersSubscription> {
 
 }

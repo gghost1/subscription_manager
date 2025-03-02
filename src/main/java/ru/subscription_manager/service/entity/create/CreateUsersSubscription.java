@@ -1,6 +1,6 @@
 package ru.subscription_manager.service.entity.create;
 
-import ru.subscription_manager.data.users_subscription.UserSubscriptionId;
+import ru.subscription_manager.data.users_subscription.UsersSubscriptionId;
 import ru.subscription_manager.data.users_subscription.UsersSubscription;
 
 import java.time.LocalDate;
@@ -16,7 +16,7 @@ public record CreateUsersSubscription(
     @Override
     public UsersSubscription create() {
         return new UsersSubscription(
-            new UserSubscriptionId(userId, subscriptionId),
+            new UsersSubscriptionId(userId, subscriptionId),
             expirationDate,
             active
         );

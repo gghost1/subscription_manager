@@ -18,7 +18,7 @@ import java.time.LocalDate;
 public class UsersSubscription {
 
     @EmbeddedId
-    private UserSubscriptionId id;
+    private UsersSubscriptionId id;
 
     @Setter
     @ManyToOne
@@ -38,7 +38,7 @@ public class UsersSubscription {
     @Column(name = "active")
     private boolean active;
 
-    public UsersSubscription(UserSubscriptionId id, LocalDate expirationDate, boolean active) {
+    public UsersSubscription(UsersSubscriptionId id, LocalDate expirationDate, boolean active) {
         this.id = id;
         this.expirationDate = expirationDate;
         this.active = active;

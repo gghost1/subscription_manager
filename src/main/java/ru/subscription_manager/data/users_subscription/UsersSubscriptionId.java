@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @Embeddable
-public record UserSubscriptionId(
+public record UsersSubscriptionId(
         @Column(name = "user_id")
         UUID userId,
         @Column(name = "subscription_id")

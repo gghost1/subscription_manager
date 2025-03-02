@@ -14,7 +14,7 @@ import ru.subscription_manager.data.subscription.Subscription;
 import ru.subscription_manager.data.subscription.SubscriptionRepository;
 import ru.subscription_manager.data.user.User;
 import ru.subscription_manager.data.user.UserRepository;
-import ru.subscription_manager.data.users_subscription.UserSubscriptionId;
+import ru.subscription_manager.data.users_subscription.UsersSubscriptionId;
 import ru.subscription_manager.data.users_subscription.UsersSubscription;
 import ru.subscription_manager.data.users_subscription.UsersSubscriptionRepository;
 import ru.subscription_manager.data.users_subscription.UsersSubscriptionSpecification;
@@ -70,7 +70,7 @@ public class UsersSubscriptionService {
         }
     }
 
-    public UsersSubscription edit(EditEntity<UsersSubscription, UserSubscriptionId> editUsersSubscription) {
+    public UsersSubscription edit(EditEntity<UsersSubscription, UsersSubscriptionId> editUsersSubscription) {
         try {
             Optional<UsersSubscription> usersSubscriptionOpt = usersSubscriptionRepository.findById(editUsersSubscription.id());
             if (usersSubscriptionOpt.isEmpty()) {
@@ -85,7 +85,7 @@ public class UsersSubscriptionService {
         }
     }
 
-    public void delete(UserSubscriptionId id) {
+    public void delete(UsersSubscriptionId id) {
         try {
             usersSubscriptionRepository.deleteById(id);
         } catch (Exception e) {
