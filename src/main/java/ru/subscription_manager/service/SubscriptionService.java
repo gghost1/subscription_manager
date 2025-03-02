@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +17,6 @@ import ru.subscription_manager.data.subscription.SubscriptionUsage;
 import ru.subscription_manager.service.entity.create.CreateEntity;
 import ru.subscription_manager.service.entity.edit.EditEntity;
 import ru.subscription_manager.service.entity.filter.SubscriptionFilter;
-import ru.subscription_manager.service.entity.filter.UserFilter;
 
 import java.util.List;
 import java.util.Optional;
@@ -125,7 +125,7 @@ public class SubscriptionService {
      */
     public Page<Subscription> getAll(SubscriptionFilter filter, int page, int size) {
         try {
-            Pageable pageable = PageRequest.of(page, size);
+            Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
             Specification<Subscription> specification = SubscriptionSpecification
                     .filterSubscriptions(filter);
             return subscriptionRepository.findAll(specification, pageable);

@@ -1,10 +1,10 @@
 package ru.subscription_manager.service;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +20,6 @@ import ru.subscription_manager.data.users_subscription.UsersSubscriptionReposito
 import ru.subscription_manager.data.users_subscription.UsersSubscriptionSpecification;
 import ru.subscription_manager.service.entity.create.CreateEntity;
 import ru.subscription_manager.service.entity.edit.EditEntity;
-import ru.subscription_manager.service.entity.filter.UserFilter;
 import ru.subscription_manager.service.entity.filter.UsersSubscriptionFilter;
 
 import java.util.Optional;
@@ -84,7 +83,7 @@ public class UsersSubscriptionService {
      */
     public Page<UsersSubscription> getAll(UsersSubscriptionFilter filter, UUID userId, int page, int size) {
         try {
-            Pageable pageable = PageRequest.of(page, size);
+            Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
             Specification<UsersSubscription> specification = UsersSubscriptionSpecification
                     .filterUsersSubscriptions(filter, userId);
             return usersSubscriptionRepository.findAll(specification, pageable);

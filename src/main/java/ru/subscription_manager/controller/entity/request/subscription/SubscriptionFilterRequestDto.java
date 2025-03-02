@@ -4,15 +4,14 @@ import jakarta.annotation.Nullable;
 import ru.subscription_manager.service.entity.filter.SubscriptionFilter;
 
 import java.util.Optional;
-import java.util.UUID;
 
 public record SubscriptionFilterRequestDto(
         @Nullable
-        String userId
+        String name
 ) {
 
     public SubscriptionFilter toSubscriptionFilter() {
-        return new SubscriptionFilter(Optional.ofNullable(userId).map(UUID::fromString));
+        return new SubscriptionFilter(Optional.ofNullable(name));
     }
 
 }

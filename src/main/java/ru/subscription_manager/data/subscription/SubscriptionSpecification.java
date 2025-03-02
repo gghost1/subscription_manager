@@ -23,15 +23,9 @@ public class SubscriptionSpecification {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            filter.user().ifPresent(userId -> {
-                Join<Subscription, UsersSubscription> userSubscriptionJoin = root.join("userSubscriptions");
-                Predicate hasSubscription = criteriaBuilder.equal(
-                        userSubscriptionJoin.get("user").get("id"),
-                        userId
-                );
-                Predicate isActive = criteriaBuilder.isTrue(userSubscriptionJoin.get("active"));
-                predicates.add(criteriaBuilder.and(hasSubscription, isActive));
-            });
+            filter.name().ifPresent(name ->
+                    predicates.add(criteriaBuilder.like(root.get("name"), name + "%"))
+            );
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
