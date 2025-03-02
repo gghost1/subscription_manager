@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.TypeMismatchException;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -40,13 +42,35 @@ public class CustomExceptionHandler {
             ConstraintViolationException.class,
             TypeMismatchException.class,
             IllegalArgumentException.class,
-            HttpMessageNotReadableException.class
+            HttpMessageNotReadableException.class,
+            InvalidDataAccessApiUsageException.class
     })
     public ResponseEntity<ExceptionResponseDto> handleValidationException(RuntimeException ex) {
         return ResponseEntity.status(400).body(new ExceptionResponseDto(
                 ex.getMessage(),
                 "400")
         );
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ExceptionResponseDto> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        if (ex.getMessage().contains("duplicate") && ex.getMessage().contains("Key (email)")) {
+            return ResponseEntity.status(400).body(new ExceptionResponseDto(
+                    "Email already exists",
+                    "400")
+            );
+        } else if (ex.getMessage().contains("only_letters")) {
+            return ResponseEntity.status(400).body(new ExceptionResponseDto(
+                    "Only letters are allowed",
+                    "400")
+            );
+        } else {
+            log.error("{} Data integrity violation exception: {}", LocalDate.now(), ex.getMessage(), ex);
+            return ResponseEntity.status(500).body(new ExceptionResponseDto(
+                    "Internal server error",
+                    "500")
+            );
+        }
     }
 
     @ExceptionHandler(Exception.class)
