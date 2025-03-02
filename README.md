@@ -24,7 +24,7 @@
 1. **Клонируйте репозиторий:**
 
    ```bash
-   git clone <>
+   git clone https://github.com/gghost1/subscription_manager
    cd subscription_manager
    ```
 
